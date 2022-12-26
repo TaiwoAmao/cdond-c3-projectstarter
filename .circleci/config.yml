@@ -144,7 +144,7 @@ jobs:
        - checkout
        # Restore from cache
        - restore_cache:
-           keys: [scanbackend]
+           keys: [scan-backend]
        - run:
            name: Scan backend 
            command: |
@@ -152,12 +152,13 @@ jobs:
              cd backend
              npm install
              npm audit fix --audit-level=critical --force
-             npm audit fix --force
+             npm audit fix --audit-level=critical --force
+             npm audit fix --audit-level=critical --force
              npm audit --audit-level=critical
        - save_cache:
           paths: [backend/node_modules]
-          key: scanbackend
-#
+          key: scan-backend
+
   deploy-infrastructure:
    docker:
      # Docker image here that supports AWS CLI
@@ -168,26 +169,27 @@ jobs:
      - run:
          name: Install Dependencies.
          command: |
-            yum install -y tar gzip
+            yum -y install tar gzip
      - run:
          name: Ensure back-end infrastructure exists
          command: |
            # Use the workflow id to mark your CloudFormation stacks so that you can reference them later on (ex: rollback). 
            aws cloudformation deploy \
-             --template-file .circleci/files/backend.yml \
-             --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-             --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
-             --tags project=udapeople
+               --template-file .circleci/files/backend.yml \
+               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
+               --tags project=udapeople
            
      - run:
          name: Ensure front-end infrastructure exist
          command: |
            # Use the workflow id to mark your CloudFormation stacks so that you can reference them later on (ex: rollback). 
+           # Use the workflow id to mark your CloudFormation stacks so that you can reference them later on (ex: rollback). 
            aws cloudformation deploy \
-             --template-file .circleci/files/frontend.yml \
-             --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
-             --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
-             --tags project=udapeople 
+               --template-file .circleci/files/frontend.yml \
+               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
+               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
+               --tags project=udapeople 
      - run:
          name: Add back-end ip to ansible inventory
          command: |
@@ -195,15 +197,10 @@ jobs:
            cd .circleci/ansible
            cat inventory.txt
            aws ec2 describe-instances \
-           --query 'Reservations[*].Instances[*].PublicIpAddress' \
-           --output text --filter Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7} >> inventory.txt
-           cat inventory.txt
-           # export BACKEND_IP=$(aws ec2 describe-instances \
-           #--query 'Reservations[*].Instances[*].PublicIpAddress' \
-           #--filter Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7} \
-           #--output text 
-           # )
-           #echo ${BACKEND_IP}
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --output text --filter Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7} >> inventory.txt
+              cat inventory.txt
+
      - persist_to_workspace:
          root: ~/
          paths:
