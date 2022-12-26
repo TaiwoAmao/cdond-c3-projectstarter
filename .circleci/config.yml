@@ -269,7 +269,7 @@ jobs:
            # Your code here
            if grep -q "has been executed successfully-" ~/project/backend/migrations_dump.txt
            then
-            curl --insecure https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
+            curl --insecure https://kvdb.io/17KFBU8xX7cobS2Up2hA9Zvr/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
            fi 
      - destroy-environment
      - revert-migrations
