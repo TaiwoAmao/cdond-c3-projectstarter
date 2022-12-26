@@ -1,6 +1,6 @@
 version: 2.1
 
-commands:
+#commands:
   #destroy-environment:
   #  description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
   #  parameters:
@@ -151,8 +151,6 @@ jobs:
              # Your code here
              cd backend
              npm install
-             npm audit fix --audit-level=critical --force
-             npm audit fix --audit-level=critical --force
              npm audit fix --audit-level=critical --force
              npm audit --audit-level=critical
        - save_cache:
