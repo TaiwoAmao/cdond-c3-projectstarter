@@ -144,7 +144,7 @@ jobs:
        - checkout
        # Restore from cache
        - restore_cache:
-           keys: [scan-backend]
+           keys: [scanbackend]
        - run:
            name: Scan backend 
            command: |
@@ -155,7 +155,7 @@ jobs:
              npm audit --audit-level=critical
        - save_cache:
           paths: [backend/node_modules]
-          key: scan-backend
+          key: scanbackend
 
   deploy-infrastructure:
    docker:
