@@ -129,7 +129,7 @@ jobs:
              # Your code here
              cd frontend
              npm install
-             npm audit fix --audit-level=critical --force
+             npm audit fix --audit-level=critical
              npm audit --audit-level=critical
        - save_cache:
           paths: [frontend/node_modules]
@@ -151,17 +151,17 @@ jobs:
              # Your code here
              cd backend
              npm install
-             npm audit fix --audit-level=critical --force
+             npm audit fix 
              npm audit --audit-level=critical
        - save_cache:
           paths: [backend/node_modules]
           key: scanbackend
 
   deploy-infrastructure:
-   docker:
+    docker:
      # Docker image here that supports AWS CLI
-     - image: amazon/aws-cli
-   steps:
+      - image: amazon/aws-cli
+    steps:
      # Checkout code from git
      - checkout
      - run:
