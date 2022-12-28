@@ -250,7 +250,7 @@ jobs:
      # Add ssh keys with fingerprint
      - add_ssh_keys:
          fingerprints:
-           - "ef:d2:57:f9:61:c0:e7:b1:8d:53:ae:fc:7a:55:f3:8b"     
+           - "fd:68:a5:e7:91:5c:f1:16:97:7c:6e:82:5b:1f:a3:1a"     
      # attach workspace
      - attach_workspace:
          at: ~/
@@ -297,7 +297,7 @@ jobs:
      - checkout
      - add_ssh_keys:
          fingerprints:
-           - "ef:d2:57:f9:61:c0:e7:b1:8d:53:ae:fc:7a:55:f3:8b"
+           - "fd:68:a5:e7:91:5c:f1:16:97:7c:6e:82:5b:1f:a3:1a"
      - attach_workspace:
          at: ~/
      - install_nodejs
@@ -339,7 +339,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "ef:d2:57:f9:61:c0:e7:b1:8d:53:ae:fc:7a:55:f3:8b"
+            - "fd:68:a5:e7:91:5c:f1:16:97:7c:6e:82:5b:1f:a3:1a"
       - attach_workspace:
           at: ~/
            # your code here
