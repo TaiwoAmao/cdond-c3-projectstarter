@@ -414,7 +414,7 @@ jobs:
   cloudfront-update:
    docker:
      # Docker image here that supports AWS CLI
-     - image: amazon/awscli
+     - image: cimg/base:current
    steps:
      # Checkout code from git
      - checkout
