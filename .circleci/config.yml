@@ -450,7 +450,7 @@ jobs:
          name: Get old stack workflow id
          command: |
            # your code here
-           export STACKS=($(aws cloudformation describe-stacks --query "Stacks[*].Outputs[?OutputKey=='WorkflowID'].OutputValue[]" --no-paginate --output text))
+           export STACKS=($(aws cloudformation describe-stacks --query "Stacks[*].Outputs[?OutputKey=='WorkFlowID'].OutputValue[]" --no-paginate --output text))
             echo -e "All STACKS (ID): ${STACKS[@]} \n"
             echo -e "CIRCLE_WORKFLOW_ID: ${CIRCLE_WORKFLOW_ID:0:7} \n"
             for OldWorkflowID in ${STACKS[@]}; do
