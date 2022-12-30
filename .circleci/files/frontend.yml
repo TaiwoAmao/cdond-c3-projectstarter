@@ -33,5 +33,7 @@ Outputs:
     Value: !GetAtt WebsiteBucket.WebsiteURL
     Description: URL for website hosted on S3
   WorkFlowID:
-     Value: !Sub ID
+     Value: !Sub ${ID}
      Description: Workflow ID
+     Export:
+      Name: !Sub '${AWS::StackName}-WorkflowID'
